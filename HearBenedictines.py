@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 from urllib2 import urlopen
 from re import findall, sub, search 
 from webbrowser import open as webbrowseropen
@@ -49,6 +51,10 @@ OFFICES = {
     'Laudes':'Lauds',
     'Missa':'Mass',
     'Missam':'Mass',
+    'MissaEF':'Mass (EF)',
+    'MissaOF':'Mass (OF)',
+    'MissamEF':'Mass (EF)',
+    'MissamOF':'Mass (OF)',
     'Tertias':'Terce',
     'Sextas':'Sexts',
     'Nonas':'Nones',
