@@ -4,7 +4,7 @@ from urllib2 import urlopen
 from re import findall, sub, search 
 from webbrowser import open as webbrowseropen
 
-version = "Version 1.5.2, last updated Feast of St Boniface of Tarsus, 2014."
+version = "Version 1.5.3, last updated Commemoration of St Paul, 2014."
 
 def title():
     print ""
