@@ -118,6 +118,7 @@ HTML_CODES = {
     "&#8217;": "'",
     "\\\\xe2\\\\x80\\\\x9c": '"',
     "\\\\xe2\\\\x80\\\\x9d": '"',
+    "\\\\xc3\\\\xbc": 'ue',
 }
 
 # a function that takes a string and replaces some HTML codes saved in it with a plaintext equivalent
