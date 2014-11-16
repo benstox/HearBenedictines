@@ -3,7 +3,7 @@
 import urllib.request, re
 from webbrowser import open as webbrowseropen
 
-version = "Version 1.6.2, last updated Feast of St Martin, 2014."
+version = "Version 1.6.3, last updated Feast of St Albert the Great, 2014."
 
 def title():
     print("")
@@ -203,7 +203,8 @@ titleexpression = """<title>(.*?)</title>"""
 pubdateexpression = """<pubDate>(.*?)</pubDate>"""
 
 norciadateexpression = """([0-9]*)n\.mp3"""
-norciaofficeexpression = """([a-zA-Z]*_?[a-zA-Z]*)[0-9]*[a-zA-Z]*n\.mp3"""
+#norciaofficeexpression = """([a-zA-Z]*_?[a-zA-Z]*)[0-9]*[a-zA-Z]*n\.mp3""" OLDER ONE
+norciaofficeexpression = """([a-zA-Z]*(_[a-zA-Z]+)?)_?[0-9]*[a-zA-Z]*n\.mp3"""
 # http://osbnorcia.org/wp-content/audio/mass/Vesperas20140827n.mp3
 
 lebarrouxdateexpression = """([0-9]{4}-[0-9]{2}-[0-9]{2})-.*\.mp3"""
@@ -222,7 +223,8 @@ def norcia_parser(url):
     except IndexError:
         ymd_date = None
     try:
-        office = re.findall(norciaofficeexpression, url)[0]
+        #office = re.findall(norciaofficeexpression, url)[0] CORRESPONDS TO THE 'OLDER ONE' OF THE norciaofficeexpressions ABOVE
+        office = re.findall(norciaofficeexpression, url)[0][0]
     except IndexError:
         office = None
     return (ymd_date, office)
@@ -437,27 +439,28 @@ def testoffices(mp3list, n):
 # THE PROGRAM THAT RUNS:
 # prints the title and gets an input:
 # user chooses either Norcia ("1") or Le Barroux ("2") or Vatican ("3")
-quit = None
-while not quit:
-    imp = title()
-    while imp.lower() != "1" and imp != "2" and imp != "3" and imp != "i" and imp != "ii" and imp != "iii" and imp != "q":
-        if imp.lower() == "v":
-            imp = input(' ' + version + '\n\n >')
+if __name__ == '__main__':
+    quit = None
+    while not quit:
+        imp = title()
+        while imp.lower() != "1" and imp != "2" and imp != "3" and imp != "i" and imp != "ii" and imp != "iii" and imp != "q":
+            if imp.lower() == "v":
+                imp = input(' ' + version + '\n\n >')
+            else:
+                imp = input(' Please choose [1] for Nursia, [2] for Le Barroux,\n [3] for Radio Vaticana or [V]ersion or [Q]uit. \n\n >')
+        
+        if imp == "Q" or imp == "q":
+            break
+        else:        
+            # prints loading message
+            loading()
+                
+        # puts choice into choosechant function
+        if imp == "1" or imp == "i" or imp == "I":
+            anything_returned = choosechant(norcia)
+        elif imp == "2" or imp == "ii" or imp == "II":
+            anything_returned = choosechant(lebarroux)
         else:
-            imp = input(' Please choose [1] for Nursia, [2] for Le Barroux,\n [3] for Radio Vaticana or [V]ersion or [Q]uit. \n\n >')
-    
-    if imp == "Q" or imp == "q":
-        break
-    else:        
-        # prints loading message
-        loading()
-            
-    # puts choice into choosechant function
-    if imp == "1" or imp == "i" or imp == "I":
-        anything_returned = choosechant(norcia)
-    elif imp == "2" or imp == "ii" or imp == "II":
-        anything_returned = choosechant(lebarroux)
-    else:
-        anything_returned = choosechant(vatican)
+            anything_returned = choosechant(vatican)
 
 
